@@ -7,5 +7,11 @@ Concepts ?
 
 
 Pondération ?
+
 	- pondérer plus les concepts de la première phrase et de la dernière phrase de chaque paragraphe/texte
-	- pondérer plus les concepts provenant de citation (donc entre guillemets)
+	- pondérer plus les concepts provenant de citation (donc entre guillemets) ?
+
+	-	Les phrases prises sont quasiment toujours dans les textes les plus longs, très rarement dans les textes courts.
+		Importance de la longueur des textes à revoir ?
+	-	Phrases avec beaucoup de noms propres (en tout cas beaucoup de majuscules) semblent privilégiées.
+		Réduire l'importance des noms propres ?
