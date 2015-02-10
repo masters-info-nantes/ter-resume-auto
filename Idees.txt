@@ -8,3 +8,7 @@ Concepts ?
 
 
 Pondération ?
+	-	Les phrases prises sont quasiment toujours dans les textes les plus longs, très rarement dans les textes courts. 
+		Importance de la longueur des textes à revoir ?
+	-	Phrases avec beaucoup de noms propres (en tout cas beaucoup de majuscules) semblent privilégiées.
+		Réduire l'importance des noms propres ?
