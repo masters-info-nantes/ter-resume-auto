@@ -9,8 +9,8 @@
  */
 
 $ROUGE_VERSION = "1.5.5";
-$MODEL_ROOT = $argv[1];
-$PEER_ROOT = $argv[2];
+$MODEL_ROOT = realpath($argv[1]);
+$PEER_ROOT = realpath($argv[2]);
 if(isset($argv[3])) {
 	$PEER_EXTENSIONS = explode(',',$argv[3]);
 } else {

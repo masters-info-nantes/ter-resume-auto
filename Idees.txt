@@ -1,10 +1,11 @@
 Concepts ?
-	- 	repérer les mots qui n'existent qu'à plusieurs ou les expressions courantes 
+	- 	repérer les mots qui n'existent qu'à plusieurs ou les expressions courantes
 		et ne les compter que comme un "seul mot"
 		ex: point de vue => le bigramme point+vue deviendrait un partie d'un trigramme
-		
-		-> colocation / mot figé 
 
+		-> colocation / mot figé
 
 
 Pondération ?
+	- pondérer plus les concepts de la première phrase et de la dernière phrase de chaque paragraphe/texte
+	- pondérer plus les concepts provenant de citation (donc entre guillemets)
