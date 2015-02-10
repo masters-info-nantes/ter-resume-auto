@@ -1,4 +1,13 @@
 <?php
+/* USAGE :
+ *
+ * php gen_rouge_in.php </path/to/models/dir> </path/to/peers/dir> [<peers_extensions>]
+ *
+ * exp1: php gen_rouge_in.php models peers txt >> config.xml
+ * exp2: php gen_rouge_in.php models peers ter1,ter2 >> config.xml
+ *
+ */
+
 $ROUGE_VERSION = "1.5.5";
 $MODEL_ROOT = $argv[1];
 $PEER_ROOT = $argv[2];
@@ -14,7 +23,6 @@ $peers = array();
 
 $models = sort_models(scandir($MODEL_ROOT));
 
-/* */
 echo "<ROUGE_EVAL version=\"$ROUGE_VERSION\">\n";
 
 foreach($models as $m_class => $ms) {
@@ -37,7 +45,6 @@ foreach($models as $m_class => $ms) {
 
 echo "</ROUGE_EVAL>\n";
 
-/* */
 /* *** FUNCTIONS *** */
 
 function sort_models($in_models) {
