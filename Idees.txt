@@ -17,6 +17,11 @@ Pondération ?
 		Réduire l'importance des noms propres ?
 	
 TODO
+	Oracle
 	regarder longueur de résumé (si toujours 100 mots)
-	
+	Comment changer les bigrammes? nouvelle approche du découpage des phrases
+		skipbigramm, ?
+		pondération maligne = les bigrammes et les trigrammes n'ont pas le même poids avec le même nombre d'occurences.
+		chercher les unigrammes qui n'apparaissent pas dans un bigramme, Back-off(?)
+		Interpolation(?)
 	
