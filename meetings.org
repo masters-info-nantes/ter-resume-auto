@@ -1,0 +1,50 @@
+* 2015-01-14
+** todo
+   - lire/comprendre les deux articles donnés
+   - faire des fiches de lecture, potentiellement une mind map pour
+     commencer à bien répertorier les connaissances.
+* 2015-01-21
+** done
+   compréhension partielle du premier article.
+** todo
+   - faire tourner sume + ROUGE
+   - lire le papier sur ROUGE
+   - faire un github
+* 2015-01-28
+** done
+   - problèmes d'installation du solver
+   - pas eu le temps de toucher à ROUGE
+** todo
+   - explorer les questions de recherche (sélection concepts +
+     pondération concepts)
+   - finir chaîne traitement (sume + ROUGE)
+* 2015-02-04
+** done
+   - github : https://github.com/masters-info-nantes/ter-resume-auto
+   - script pour tout résumer
+   - script pour génerer XML rouge
+   - pas de merge des deux → pas encore de pipeline fonctionnelle
+** todo
+   - merger les travaux des deux sous-groupes : sume + ROUGE
+   - résumer manuellement un texte par extraction et essayer d'en
+     déduire une approche globale
+   - regarder SVO ou constituants sur une dizaine de phrases
+   - trouver d'autres manières de split les phrases.
+* 2015-02-11
+** done
+   - étude des résultats/retour sur un résumé manuel :
+     - Clément :
+       - phrases souvent prises des documents longs
+       - phrases souvent remplies de noms propres
+     - Marie :
+       - n'utiliserait pas de citations
+       - privilégierait les documents courts (documents longs diluent
+         l'information)
+     - Anthony :
+       - utiliserait les citations pour la pondération
+       - position importante (premières + dernières)
+       - dur de trouver triples SVO communs
+   - pipeline mergée. Un résumé vide à investiguer
+** todo
+   - créer gold extractif (oracle)
+   - regarder back-off et interpolation pour la sélection
