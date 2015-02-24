@@ -36,8 +36,8 @@ foreach($corpus_list as $corpus_name) {
 
 $corpus_sum = array();
 
-foreach($corpus_list as $corpus_dir) {
-//~ $corpus_dir = $corpus_list[0];
+foreach($corpus_list as $corpus_dir) {// comment for only one corpus test
+//~ $corpus_dir = $corpus_list[0];// uncomment for only one corpus test
 	// get full corpus document list
 	$dir = $CORPUS_DIR.'/'.$corpus_dir;
 	$doc_list = scandir($dir);
@@ -61,7 +61,6 @@ foreach($corpus_list as $corpus_dir) {
 	foreach($corpus_model[$corpus_dir] as $m) {
 		$models[$m] = clean_sum(file_get_contents($MODEL_DIR.'/'.$m));
 	}
-	
 	// generate alls combinaisons of sentences
 	// remove sentences more than 100 words
 	foreach($sentences as $key => $s) {
@@ -70,12 +69,12 @@ foreach($corpus_list as $corpus_dir) {
 		}
 	}
 	$sentences = array_values($sentences);
-	//~ $combinaisons = array();
-	$best = combine_sentences_rec($sentences,$models,$combinaisons);
-	gen_real_sum($sentences,$best);
-	echo "combinaisons found = \n";
+	$best = combine_sentences_rec($sentences,$models);
 	var_dump($best);
-}
+	$real_best = gen_real_sum($sentences,$best);
+	var_dump($real_best);
+	echo "combinaisons found = \n";
+}// comment for only one corpus test
 
 
 /** FUNCTIONS **/
@@ -112,14 +111,17 @@ function count_word(&$sentence) {
 	);
 }
 
-/*
 function concat_array(&$array,$separator='.') {
-	$ret = $array[0];
-	for($i=1;$i<count($array);$i++) {
-		$ret .= $separator.$array[$i];
+	if(isset($array[0])) {
+		$ret = $array[0];
+		for($i=1;$i<count($array);$i++) {
+			$ret .= $separator.$array[$i];
+		}
+		return $ret;
+	} else {
+		return '';
 	}
-	return $ret;
-}*/
+}
 
 function clean_sum(&$str_model) {
 	global $useless_word;
@@ -144,34 +146,62 @@ function avg_score_sum(&$array_sum_test,&$models) {
 	foreach($models as &$model) {
 		$score += calc_score_sum($array_sum_test,$model);
 	}
-	$score /= count($models);
-	return (int)round($score*100.0);
+	return $score;
+}
+
+function firstBetterSum($sum1,$sum2) {
+	$ret = ( $sum1['score'] > $sum2['score']
+		|| ($sum1['score'] == $sum2['score'] && $sum1['len'] < $sum2['len'] && count($sum1['sen']) > count($sum2['sen']))
+	);
+	$concat_key1 = concat_array($sum1['sen']);
+	$concat_key2 = concat_array($sum2['sen']);
+	return $ret;
 }
 
 $i = 0;
-function combine_sentences_rec(&$sentences, &$models, &$best = array('len'=>0,'sen'=>array()), &$best_score = 0, $sum=array('len'=>0,'sen'=>array())) {
-	global $i;
-	foreach($sentences as $key => &$s) {
+$j = 0;
+function combine_sentences_rec(&$sentences, &$models, $best = array('len'=>0,'sen'=>array(),'score' => 0), $sum=array('len'=>0,'sen'=>array())) {
+	global $i,$j;
+	$maxsize = true;
+	foreach($sentences as $key => $s) {
 		if(in_array($key,$sum['sen'])){continue;}
 		if($sum['len']+$s['len'] <= 100) {
+			$maxsize = false;
 			$newsum = $sum;
 			$newsum['len'] += $s['len'];
 			$newsum['sen'][] = $key;
-			combine_sentences_rec($sentences,$models,$best,$best_score,$newsum);
+			if(count($sum['sen']) < 6) {
+				$sub_best = combine_sentences_rec($sentences,$models,$best,$newsum);
+				if(firstBetterSum($sub_best,$best)) {
+					$best['len'] = $sub_best['len'];
+					$best['sen'] = $sub_best['sen'];
+					$best['score'] = $sub_best['score'];
+				}
+			}
 		}
 	}
-	$sum_score = avg_score_sum(clean_sum(gen_real_sum($sentences,$sum)['sen']),$models);
-	if($sum_score > $best_score) {
-		$best = $sum;
-		$best_score = $sum_score;
-		$i++;
-		echo 'found ('.$sum['len'].'/'.count($sum['sen']).' // '.$sum_score.") $i\n";
+	if($maxsize) {
+		$sum_score = avg_score_sum(clean_sum(gen_real_sum($sentences,$sum)['sen']),$models);
+		$j++;
+		
+		$sum['score'] = $sum_score;
+		if(firstBetterSum($sum,$best)) {
+			$i++;
+			$best['len'] = $sum['len'];
+			$best['sen'] = $sum['sen'];
+			$best['score'] = $sum_score;
+			$concat_key = concat_array($best['sen']);
+			echo "\t\t\t\t\t\t\t\t\t\tfound (".$best['len'].'/'.count($best['sen']).' // '.$best['score'].") [$i/$j] $concat_key\n";
+		} else {
+			$concat_key = concat_array($sum['sen']);
+			echo 'erase ('.$sum['len'].'/'.count($sum['sen']).' // '.$sum_score.") [$i/$j] $concat_key\n";
+		}
 	}
 	return $best;
 }
 
 function gen_real_sum(&$sentences,&$sum) {
-	$newsum['len'] = $sum['len'];
+	$newsum = $sum;
 	$newsum['sen'] = '';
 	foreach($sum['sen'] as $sentence_key) {
 		$newsum['sen'] .= ' '.$sentences[$sentence_key]['sen'];
