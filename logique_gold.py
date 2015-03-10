@@ -19,6 +19,8 @@ corpus_path = "."
 corpus_dir_name = "tac2008"
 dest_path = "."
 dest_dir_name = "peers"
+abst_path = "."
+abst_dir_name = "abstracts"
 files = []
 os.chdir(corpus_path)
 for root, dirs, file in os.walk(corpus_dir_name):
@@ -29,8 +31,6 @@ i = 1
 
 # create the summarizer
 for f in files:
-	fo_name = to_peers_name(corpus_name=f,extension='txt')
-	fo = codecs.open(dest_path+'/'+dest_dir_name+'/'+fo_name, "wb", "utf-8")
 	name = corpus_dir_name+"/"+f
 	s = sume.ilp_models.ConceptBasedILPSummarizer(name)
 	sys.stdout.write(f+' pending')
@@ -59,12 +59,10 @@ for f in files:
 	best_sentences = []
 	best_sentences_weights = []
 	for i in range(0,10):
-		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form.encode("utf-8"))
+		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form.encode("utf-8")+" ")
 		best_sentences_weights.append(poids[ratio[max(ratio)]])
 		ratio.pop(max(ratio))
 
-#	print best_sentences
-#	print best_sentences_weights
 
 	combis = itertools.combinations(best_sentences,3)
 	usable_combis = []
@@ -79,5 +77,10 @@ for f in files:
 	for summary in summaries:
 		if(len(summary.split()) <= 100):
 			good_summaries.append("".join(summary))
+
 	for p in good_summaries:
-		print "\n\n"+"".join(p)
+		fo_name = to_peers_name(corpus_name=f,extension='txt.'+str(good_summaries.index(p)))
+		fo = codecs.open(abst_path+'/'+abst_dir_name+'/'+fo_name, "wb", "utf-8")
+		fo.write("".join(p))
+		fo.close()
+		sys.stdout.write('\r'+f+' => '+fo_name+' done\n')
