@@ -48,3 +48,15 @@
 ** todo
    - créer gold extractif (oracle)
    - regarder back-off et interpolation pour la sélection
+* 2015-02-25
+** done
+   brute force pour calculer un gold extractif => pas
+   calculable. Besoin de filtrer
+** todo
+   - filtrer à partir du gold en calculant ses concepts et en ne
+     considérant que ceux là dans les scores des résumés.
+* 2015-03-04
+** done
+   extraire les concepts à partir du gold.
+** todo
+   trouver les meilleures phrases à partir de ces concepts.
