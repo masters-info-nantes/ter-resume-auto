@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sume, os, codecs
+import sume, os, codecs, itertools
 import os.path
 import sys
 
@@ -52,8 +52,19 @@ for f in files:
 	ratio = []
 	for i in range(0, len(lengths)):
 		ratio.append(poids[i]/lengths[i])
-	print ratio
 	best_sentences = []
+	best_sentences_weights = []
 	for i in range(0,10):
-		best_sentences.append(concepts[(ratio.pop(max(ratio)))])
-	print best_sentences
+		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form)
+		best_sentences_weights.append(poids[ratio[max(ratio)]])
+		ratio.pop(max(ratio))
+
+#	print best_sentences
+#	print best_sentences_weights
+
+	combis = itertools.combinations(best_sentences,3)
+	usable_combis = []
+	for e in combis:
+		usable_combis.append(e)
+	for i in usable_combis:
+		print i
