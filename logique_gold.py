@@ -2,6 +2,10 @@
 import sume, os, codecs, itertools
 import os.path
 import sys
+from itertools import chain, imap
+
+def flatmap(f):
+	return chain.from_iterable(f)
 
 def to_peers_name(corpus_name,extension='txt'):
 	part1 = corpus_name[:5]
@@ -55,7 +59,7 @@ for f in files:
 	best_sentences = []
 	best_sentences_weights = []
 	for i in range(0,10):
-		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form)
+		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form.encode("utf-8"))
 		best_sentences_weights.append(poids[ratio[max(ratio)]])
 		ratio.pop(max(ratio))
 
@@ -66,5 +70,14 @@ for f in files:
 	usable_combis = []
 	for e in combis:
 		usable_combis.append(e)
-	for i in usable_combis:
-		print i
+
+	summaries = []
+	for i in list(usable_combis):
+		summaries.append("".join(i))
+
+	good_summaries = []
+	for summary in summaries:
+		if(len(summary.split()) <= 100):
+			good_summaries.append("".join(summary))
+	for p in good_summaries:
+		print "\n\n"+"".join(p)
