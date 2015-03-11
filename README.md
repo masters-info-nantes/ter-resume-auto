@@ -19,4 +19,8 @@ rm WordNet-2.0.exc.db # only if exist
 ln -s WordNet-2.0-Exceptions/WordNet-2.0.exc.db WordNet-2.0.exc.db
 ```
 
-[http://kavita-ganesan.com/rouge-howto](how to ROUGE)
+[http://kavita-ganesan.com/rouge-howto](http://kavita-ganesan.com/rouge-howto)
+
+## convert ROUGE output to CSV
+
+[http://kavita-ganesan.com/software-rouge2csv](http://kavita-ganesan.com/software-rouge2csv)
