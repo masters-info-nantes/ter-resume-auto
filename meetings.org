@@ -60,3 +60,8 @@
    extraire les concepts à partir du gold.
 ** todo
    trouver les meilleures phrases à partir de ces concepts.
+* 2015-03-11
+** done
+   créer les résumés golds
+** todo
+   évaluer les résumés golds produits
