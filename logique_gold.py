@@ -17,8 +17,8 @@ def to_peers_name(corpus_name,extension='txt'):
 # files are expected to be in one tokenized sentence per line format.
 corpus_path = "."
 corpus_dir_name = "tac2008"
-dest_path = "."
-dest_dir_name = "peers"
+#~ dest_path = "."
+#~ dest_dir_name = "peers"
 abst_path = "."
 abst_dir_name = "abstracts"
 files = []
@@ -28,7 +28,8 @@ for root, dirs, file in os.walk(corpus_dir_name):
         files.append(d)
 files_number = len(files)
 i = 1
-
+max_sum_finded = 0
+sum_finded = 0
 # create the summarizer
 for f in files:
 	name = corpus_dir_name+"/"+f
@@ -62,25 +63,27 @@ for f in files:
 		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form.encode("utf-8")+" ")
 		best_sentences_weights.append(poids[ratio[max(ratio)]])
 		ratio.pop(max(ratio))
-
-
-	combis = itertools.combinations(best_sentences,3)
-	usable_combis = []
-	for e in combis:
-		usable_combis.append(e)
-
-	summaries = []
-	for i in list(usable_combis):
-		summaries.append("".join(i))
-
-	good_summaries = []
-	for summary in summaries:
-		if(len(summary.split()) <= 100):
-			good_summaries.append("".join(summary))
-
-	for p in good_summaries:
-		fo_name = to_peers_name(corpus_name=f,extension='txt.'+str(good_summaries.index(p)))
-		fo = codecs.open(abst_path+'/'+abst_dir_name+'/'+fo_name, "wb", "utf-8")
-		fo.write("".join(p))
-		fo.close()
-		sys.stdout.write('\r'+f+' => '+fo_name+' done\n')
+	if(max_sum_finded < sum_finded):
+		max_sum_finded = sum_finded
+	sum_finded = 0
+	for nb_sentences in range(2,7):# => for(i=2;i<7;i++)
+		combis = itertools.combinations(best_sentences,nb_sentences)
+		usable_combis = []
+		for e in combis:
+			usable_combis.append(e)
+		summaries = []
+		for i in list(usable_combis):
+			summaries.append("".join(i))
+		good_summaries = []
+		for summary in summaries:
+			if(len(summary.split()) <= 100):
+				good_summaries.append("".join(summary))
+		for p in good_summaries:
+			#~ fo_name = to_peers_name(corpus_name=f,extension='txt.'+str(good_summaries.index(p)))
+			fo_name = to_peers_name(corpus_name=f,extension='txt.'+str(sum_finded))
+			sum_finded += 1
+			fo = codecs.open(abst_path+'/'+abst_dir_name+'/'+fo_name, "wb", "utf-8")
+			fo.write("".join(p))
+			fo.close()
+			sys.stdout.write('\r'+f+' => '+fo_name+' done\n')
+sys.stdout.write('\nmax sum finded for one corpus = '+str(max_sum_finded))
