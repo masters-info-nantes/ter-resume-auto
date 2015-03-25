@@ -3,6 +3,7 @@ import sume, os, codecs, itertools
 import os.path
 import sys
 from itertools import chain, imap
+from __future__ import division
 
 def flatmap(f):
 	return chain.from_iterable(f)
@@ -68,11 +69,8 @@ for f in files:
 	sum_finded = 0
 	for nb_sentences in range(2,7):# => for(i=2;i<7;i++)
 		combis = itertools.combinations(best_sentences,nb_sentences)
-		usable_combis = []
-		for e in combis:
-			usable_combis.append(e)
 		summaries = []
-		for i in list(usable_combis):
+		for i in list(combis):
 			summaries.append("".join(i))
 		good_summaries = []
 		for summary in summaries:
