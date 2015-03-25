@@ -71,5 +71,6 @@
    - évaluation ROUGE
 ** todo
    - enlever les résumés auxquels on peut rajouter une phrase sans
-     dépasser la limite de taille des résumés golds
+     dépasser la limite de taille des résumés golds et corriger le
+     calcul de gain
    - corriger l'évaluation ROUGE
