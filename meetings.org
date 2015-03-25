@@ -65,3 +65,11 @@
    créer les résumés golds
 ** todo
    évaluer les résumés golds produits
+* 2015-03-25
+** done
+   - correction des résumés golds
+   - évaluation ROUGE
+** todo
+   - enlever les résumés auxquels on peut rajouter une phrase sans
+     dépasser la limite de taille des résumés golds
+   - corriger l'évaluation ROUGE
