@@ -15,11 +15,11 @@ rougeref=$2
 
 ## STEP 1 : generate rouge score for all config file
 
-#~ for f in $list
-#~ do
-	#~ echo ${f:$motif_len}
-	#~ $ROUGE -e $ROUGE_DATA -n 4 -m -l 100 -x -c 95 -r 1000 -f 1 -p 0.5 -t 0 -d -a $f > rouge.out.txt.${f:$motif_len} 2> rouge.err.txt.${f:$motif_len}
-#~ done
+for f in $list
+do
+	echo ${f:$motif_len}
+	$ROUGE -e $ROUGE_DATA -n 4 -m -l 100 -x -c 95 -r 1000 -f 1 -p 0.5 -t 0 -d -a $f > rouge.out.txt.${f:$motif_len} 2> rouge.err.txt.${f:$motif_len}
+done
 
 
 ## STEP 2 : generate average and difference with reference
@@ -58,7 +58,7 @@ do
 	for i in $(seq 1 4)
 	do
 		echo "ROUGE-$i" >> rouge.out.txt
-		cat rouge.out.txt.${f:$motif_len} | grep "ROUGE-$i Average_R" | awk '{print $4, $1}' | sort -nr | head -n 5 >> rouge.out.txt
+		cat rouge.out.txt.${f:$motif_len} | grep "ROUGE-$i Eval" | sed 's/:/ /g' | awk '{print $6, $4}' | sort -nr | head -n 5 | awk '{print $2,$1}' >> rouge.out.txt
 		echo "" >> rouge.out.txt
 	done
 	echo "" >> rouge.out.txt
