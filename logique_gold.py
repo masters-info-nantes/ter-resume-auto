@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 import sume, os, codecs, itertools
 import os.path
 import sys
 from itertools import chain, imap
-from __future__ import division
 
 def flatmap(f):
 	return chain.from_iterable(f)
@@ -57,13 +57,13 @@ for f in files:
 	lengths = [s.sentences[j].length for j in range(0,len(s.sentences))]
 	ratio = []
 	for i in range(0, len(lengths)):
-		ratio.append(poids[i]/lengths[i])
+		ratio.append(int((poids[i]/lengths[i])*10000))
 	best_sentences = []
 	best_sentences_weights = []
-	for i in range(0,10):
-		best_sentences.append(s.sentences.pop(ratio[max(ratio)]).untokenized_form.encode("utf-8")+" ")
-		best_sentences_weights.append(poids[ratio[max(ratio)]])
-		ratio.pop(max(ratio))
+	for i in range(0,15):
+		best_sentences.append(s.sentences.pop(ratio.index(max(ratio))).untokenized_form.encode("utf-8")+" ")
+		best_sentences_weights.append(poids[ratio.index(max(ratio))])
+		ratio.pop(ratio.index(max(ratio)))
 	if(max_sum_finded < sum_finded):
 		max_sum_finded = sum_finded
 	sum_finded = 0
