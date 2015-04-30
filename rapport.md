@@ -119,3 +119,7 @@ Les résultats de cette approximation montrent que notre démarche n'a pas été
 
 ## Conclusion
 
+La génération de résumés automatique est un domaine de recherche de grande complexité, et l'amélioration de l'état de l'art est un objectif difficile à atteindre.
+L'exploration des différentes pistes que nous avons trouvées nous a permis d'éliminer des possibilités, et surtout d'aborder la recherche sur un véritable problème de recherche.
+En complément des acquistions techniques telles que l'utilisation d'un solveur d'optimisation et la programmation linéaire, nous nous sommes intéressés à l'étude d'articles scientifiques, ainsi qu'à la notion de choix et de compromis quant aux résultats.
+Il aurait toutefois été intéressant d'être accompagnés d'un étudiant du master ORO pour accélérer l'avancée sur l'optimisation et la programmation linéaire, ces sujets n'étant pas abordés dans nos formations respectives (ALMA et ATAL).
