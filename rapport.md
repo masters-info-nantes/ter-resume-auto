@@ -25,19 +25,19 @@ Dans les exigence de départ, nous sommes partis dans l'idée de n'utiliser aucu
 
 ### Qu'est-ce que le résumé automatique par extraction ?
 
-Le principe du résumé automatique par extraction est de partir d'un ensemble de texte (appelé corpus), d'en extraire un certain nombre de phrase, de les trier puis d'en choisir certaines pour constituer un résumer.
+Le principe du résumé automatique par extraction est de partir d'un ensemble de texte (appelé corpus), d'en extraire un certain nombre de phrases, de les trier puis d'en choisir certaines pour constituer un résumé.
 
 ![Logique du résumé automatique par extraction](https://raw.githubusercontent.com/masters-info-nantes/ter-resume-auto/master/presentation/first.png)
 
 ### Qu'est-ce qu'un concept ?
 
-Un concept est une entité, souvent pondérée en concordance avec son importance dans l'étude. Par exemple, la phrase "Le nouveau président va entrer à la maison blanche.", si on choisit de définir que nos concepts sont tous des bigrammes (ou groupe de 2 mots adjacents), alors nous obtenons "Le nouveau", "nouveau président", "président va", ... comme liste de bigramme. Mais si nous décidons qu'un groupe nominal est un concept alors nous obtenons "Le nouveau président", "va entrer" et "à la maison blanche" comme liste de concept. Il est aussi possible d'utiliser beaucoup d'autres critère, comme les arbres de dépendance, ou même des mélanger ces méthodes de découpage.
+Un concept est une entité, souvent pondérée en concordance avec son importance dans l'étude. Par exemple, la phrase "Le nouveau président va entrer à la maison blanche.", si on choisit de définir que nos concepts sont tous des bigrammes (ou groupe de 2 mots adjacents), alors nous obtenons "Le nouveau", "nouveau président", "président va", ... comme liste de bigrammes. Mais si nous décidons qu'un groupe nominal est un concept alors nous obtenons "Le nouveau président", "va entrer" et "à la maison blanche" comme liste de concepts. Il est aussi possible d'utiliser beaucoup d'autres critèrse, comme les arbres de dépendances, ou même des mélanger ces méthodes de découpage.
 
-En général, les concepts composés de mot-vide sont éliminés. Les mot-vides sont des mots qui n'apporte aucun sens à la phrase comme "le", "la", "à", etc. Donc notre exemple le bigramme "à la" sera supprimé par exemple.
+En général, les concepts composés de mot-vide sont éliminés. Les mot-vides sont des mots qui n'apportent aucun sens à la phrase comme "le", "la", "à", etc. Donc notre exemple le bigramme "à la" sera supprimé par exemple.
 
 ### ROUGE
 
-ROUGE (pour Recall-Oriented Understudy for Gisting Evaluation), est un système de mesure pour les résumés automatiques. Pour attribuer un score à un résumé il le compare avec plusieurs résumés écrit à la main par des humains et fait la moyennes des scores de correspondance avec chacun d'eux.
+ROUGE (pour Recall-Oriented Understudy for Gisting Evaluation), est un système de mesure pour les résumés automatiques. Pour attribuer un score à un résumé, il le compare avec plusieurs résumés écrits à la main par des humains et fait la moyennes des scores de correspondance avec chacun d'eux.
 
 Ce système est couramment utilisé dans des compétitions comme le TAC (Text Analysis Conference) et DUC (Document Understanding Conference).
 
